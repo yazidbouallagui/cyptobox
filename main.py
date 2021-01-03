@@ -2,6 +2,7 @@ import encode
 import decode
 import hashing
 import hashcracker
+import symetric
 
 def encode_decode():
     print("1: Message encoding ")
@@ -72,7 +73,7 @@ def menu():
                     hashcracker.hash_cracking_menu()
                     break
                 elif choix == 4:
-                    symetric()
+                    symetric.menu_symetric()
                     break
                 elif choix == 5:
                     asymetric()
