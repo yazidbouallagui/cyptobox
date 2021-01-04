@@ -1,7 +1,16 @@
 # cyptobox
-This project is developed by Bouallagui Yazid & Ben Ali Neila 
-Students of Tekup university based in Tunisia 
-To run this code you need python3 
- the packages :
-# pip3 install cryptodome
-# pip3 install pysqlite3
+Cyptobox is a Python library for dealing with cryptography algorithms.
+## Installation
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install dependecies.
+
+```bash
+pip3 install pysqlite3
+pip3 install cryptodome
+```
+
+## Usage
+
+```python
+python3 start
+```
