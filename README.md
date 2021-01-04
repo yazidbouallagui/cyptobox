@@ -12,5 +12,5 @@ pip3 install cryptodome
 ## Usage
 
 ```python
-python3 start
+python3 start.py
 ```
