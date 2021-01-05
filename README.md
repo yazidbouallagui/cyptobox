@@ -7,6 +7,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install depende
 ```bash
 pip3 install pysqlite3
 pip3 install pycryptodome
+pip3 install rsa
 ```
 
 ## Usage
