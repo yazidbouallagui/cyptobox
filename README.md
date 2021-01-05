@@ -8,6 +8,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install depende
 pip3 install pysqlite3
 pip3 install pycryptodome
 pip3 install rsa
+pip3 install pyDes
 ```
 
 ## Usage
