@@ -3,6 +3,7 @@ import decode
 import hashing
 import hashcracker
 import symetric
+import asymetric
 
 def encode_decode():
     print("1: Message encoding ")
@@ -76,7 +77,7 @@ def menu():
                     symetric.menu_symetric()
                     break
                 elif choix == 5:
-                    asymetric()
+                    asymetric.menu_asymetric()
                     break
             elif choix == 6:
                 print("Goodbye ")
