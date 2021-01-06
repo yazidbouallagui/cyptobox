@@ -27,28 +27,12 @@ def BinaryToDecimal(binary):
 
 
 def bin_decode(bin_data):
-    # initializing a empty string for
-    # storing the string data
-    str_data = ' '
+    binary_int = int(bin_data, 2)
+    byte_number = binary_int.bit_length() + 7 // 8
+    binary_array = binary_int.to_bytes(byte_number, "big")
+    ascii_text = binary_array.decode()
 
-    # slicing the input and converting it
-    # in decimal and then converting it in string
-    for i in range(0, len(bin_data), 7):
-        # slicing the bin_data from index range [0, 6]
-        # and storing it as integer in temp_data
-        temp_data = int(bin_data[i:i + 7])
-
-        # passing temp_data in BinarytoDecimal() function
-        # to get decimal value of corresponding temp_data
-        decimal_data = BinaryToDecimal(temp_data)
-
-        # Deccoding the decimal value returned by
-        # BinarytoDecimal() function, using chr()
-        # function which return the string corresponding
-        # character for given ASCII value, and store it
-        # in str_data
-        str_data = str_data + chr(decimal_data)
-        return str_data
+    return ascii_text
 
 
 def decode_base64():
@@ -81,7 +65,7 @@ def decode_binary():
 def decoding():
     print("1: Base64 ")
     print("2: Hex ")
-    print("3: Binary ")
+    #("3: Binary ")
     print("4: Return ")
     while True:
         choix_1_1 = int(input("please type your choice : "))
@@ -95,7 +79,8 @@ def decoding():
                     decode_hex()
                     break
                 if choix_1_1 == 3:
-                    decode_binary()
+                    #decode_binary()
+                    decoding()
                     break
                 elif choix_1_1 == 4:
                     main.encode_decode()
