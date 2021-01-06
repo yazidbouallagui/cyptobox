@@ -2,6 +2,8 @@ from Crypto import Random  # use to generate a random byte string of a length we
 from Crypto.Cipher import AES
 from Crypto.Hash import SHA256
 from Crypto import Random
+from struct import pack
+from Crypto.Cipher import Blowfish
 from Crypto.Cipher import DES3
 from Crypto.Random import get_random_bytes
 import main
@@ -146,21 +148,83 @@ def decryptDES(data, key):
 
 
 def DESenc():
-    my_password = input("Please input a secret")
+    while True:
+        try:
+            my_password = input("Please input a secret of exactly 8 characters")
+            if len(my_password) != 8:
+                raise ValueError
+            break
+        except ValueError:
+            print("secret must be exactly 8 characters length")
+            DESenc()
+            break
     data = input("Please input a string that you want to encrypt")
-    encrypted = encryptDES(data, my_password)
-    print("encrypted data: ", encrypted)
+    encrypted = encryptDES(data.encode(), my_password.encode())
+    print("encrypted data: ")
+    print(base64.b64encode(encrypted).decode("latin-1") if base64.encode else encrypted)
+
     menu_symetric()
 
 
 def DESdec():
-    my_password = input("Please input a secret")
-    data = input("Please input a string that you want to decrypt").encode()
+    while True:
+        try:
+            my_password = input("Please input a secret of exactly 8 characters")
+            if len(my_password) != 8:
+                raise ValueError
+            break
+        except ValueError:
+            print("secret must be exactly 8 characters length")
+            DESdec()
+            break
+    data = input("Please input a string that you want to decrypt")
+    if base64.decode:
+        data = base64.b64decode(data.encode("latin-1"))
     k = des(my_password, CBC, "\0\0\0\0\0\0\0\0", pad=None, padmode=PAD_PKCS5)
     print(data)
-    #decrypted = decryptDES(data, my_password)
+    # decrypted = decryptDES(data, my_password)
     print("Congratulations data decrypted succsessfully")
     print("decrypted data: ", k.decrypt(data).decode())
+    menu_symetric()
+
+
+def encryptBF(data, key):
+    pass
+
+
+def decryptBF(data, key):
+    pass
+
+
+def BFenc():
+    bs = Blowfish.block_size
+    my_password = input("Please input a secret").encode()
+    data = input("Please input a string that you want to encrypt")
+    iv = Random.new().read(bs)
+    cipher = Blowfish.new(my_password, Blowfish.MODE_CBC, iv)
+    plen = bs - divmod(len(data), bs)[1]
+    padding = [plen] * plen
+    padding = pack('b' * plen, *padding)
+    msg = iv + cipher.encrypt(data.encode() + padding)
+    # encrypted = encryptDES(data, my_password)
+    print("encrypted data: ")
+    print(base64.b64encode(msg).decode("latin-1") if base64.encode else msg)
+    menu_symetric()
+
+
+def BFdec():
+    bs = Blowfish.block_size
+    my_password = input("Please input a secret").encode()
+    data = input("Please input a string that you want to decrypt").encode()
+    if base64.decode:
+        msg = base64.b64decode(data)[bs:]
+    iv = base64.b64decode(data)[:bs]
+    d = Blowfish.new(my_password, Blowfish.MODE_CBC, iv)
+    decypted = d.decrypt(msg)
+    print()
+    # decrypted = decryptDES(data, my_password)
+    print("Congratulations data decrypted succsessfully")
+    print("decrypted data: ", decypted.decode().rstrip("\x03"))
     menu_symetric()
 
 
@@ -170,7 +234,7 @@ def menu_symetric():
     print("3: Encrypt DES ")
     print("4: decrypt DES ")
     print("5: Encrypt blowfish ")
-    print("6: decrypt blowfish ")
+    print("6: Decrypt blowfish ")
     print("7: Return ")
     while True:
         choix_1_1 = int(input("please type your choice : "))
@@ -190,10 +254,10 @@ def menu_symetric():
                     DESdec()
                     break
                 elif choix_1_1 == 5:
-                    main.menu()
+                    BFenc()
                     break
                 elif choix_1_1 == 6:
-                    main.menu()
+                    BFdec()
                     break
                 elif choix_1_1 == 7:
                     main.menu()
