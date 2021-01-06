@@ -1,4 +1,4 @@
-# cyptobox
+# cryptobox
 Cyptobox is a Python library for dealing with cryptography algorithms.
 ## Installation
 
