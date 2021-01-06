@@ -28,8 +28,8 @@ def generate_keys():
 
 # print(generate_keys()[0])
 
-def protect_rsa_key(password):
-    pem_key = key.export_key(passphrase=password)
+#def protect_rsa_key(password):
+#    pem_key = key.export_key(passphrase=password)
 
 
 def sign_rsa():
