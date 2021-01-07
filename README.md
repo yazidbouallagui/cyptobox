@@ -1,5 +1,5 @@
 # cryptobox
-Cyptobox is a Python library for dealing with cryptography algorithms.
+Cryptobox is a Python library for dealing with cryptography algorithms.
 ## Installation
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install dependecies.
